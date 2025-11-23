@@ -49,6 +49,10 @@ class ProposalsController extends Controller
                 ...$validated
             ]);
 
+            $lead = Lead::find($leadId);
+            $lead->pipeline_stage_id = 3;
+            $lead->save();
+
             return redirect()->route('leads.proposals.index', ['lead_id' => $leadId])
                 ->with('success', 'Proposta gerada com sucesso!');
 
@@ -113,9 +117,9 @@ class ProposalsController extends Controller
     public function generatePdf(string $leadId, string $proposalId)
     {
         $proposal = Proposal::with(['lead.client', 'createdBy'])->where('lead_id', $leadId)->findOrFail($proposalId);
-        
+
         $pdf = Pdf::loadView('proposals.pdf', compact('proposal'));
-        
+
         return $pdf->stream('proposta_' . $proposal->id . '.pdf');
     }
 
@@ -155,13 +159,13 @@ class ProposalsController extends Controller
     public function approve(string $leadId, string $proposalId)
     {
         $proposal = Proposal::where('lead_id', $leadId)->findOrFail($proposalId);
-        
+
         $proposal->update(['status' => 'Aceita']);
 
         $contractStage = PipelineStage::where('name', 'LIKE', '%Contrato%')
             ->orWhere('name', 'LIKE', '%Assinatura%')
             ->first();
-        
+
         if ($contractStage) {
             $proposal->lead->update(['pipeline_stage_id' => $contractStage->id]);
         }

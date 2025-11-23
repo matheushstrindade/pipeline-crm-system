@@ -63,11 +63,11 @@ Route::middleware(['auth', 'force.password.change', 'role:gestor,assessor'])->gr
     Route::prefix('leads/{lead_id}')->name('leads.')->group(function () {
         Route::resource('diagnostics', DiagnosticsController::class);
         Route::resource('proposals', ProposalsController::class);
-        Route::resource('contract', ContractsController::class);
+        Route::resource('contracts', ContractsController::class);
         Route::resource('actives', ActiveClientsController::class);
         Route::resource('losts', LostClientsController::class);
         Route::resource('notes', NotesController::class);
-        
+
         // Rotas específicas de contratos
         Route::post('contract/{contract}/interact', [ContractsController::class, 'interact'])->name('contract.interact');
         Route::post('contract/{contract}/assign', [ContractsController::class, 'assign'])->name('contract.assign');
@@ -78,7 +78,7 @@ Route::middleware(['auth', 'force.password.change', 'role:gestor,assessor'])->gr
         Route::post('proposals/{proposal}/email', [ProposalsController::class, 'sendEmail'])->name('proposals.email');
         Route::post('proposals/{proposal}/approve', [ProposalsController::class, 'approve'])->name('proposals.approve');
         Route::post('proposals/{proposal}/reject', [ProposalsController::class, 'reject'])->name('proposals.reject');
-        
+
     });
 
     // Rotas de contratos (fora do contexto de lead)
