@@ -169,7 +169,7 @@ class ProposalsController extends Controller
             $proposal->lead->update(['pipeline_stage_id' => $contractStage->id]);
         }
 
-        return redirect()->route('leads.contract.create', ['lead_id' => $leadId])
+        return redirect()->route('leads.contracts.create', ['lead_id' => $leadId])
             ->with('success', 'Proposta Aprovada! Lead movido para fase de Contrato.');
     }
 
