@@ -120,7 +120,7 @@
 
                     @case(2)
 
-                        
+
                         <a href="{{ route('leads.proposals.create', $lead->id) }}"
                            class="inline-block bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-xl shadow-lg transition cursor-pointer">
                             Avançar Pipeline → Proposta
@@ -138,11 +138,6 @@
                         <a href="{{ route('leads.actives.create', ['lead_id' => $lead->id]) }}"
                            class="inline-block bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-xl shadow-lg transition cursor-pointer">
                             Tornar Cliente Ativo
-                        </a>
-
-                        <a href="{{ route('leads.losts.create', ['lead_id' => $lead->id]) }}"
-                           class="inline-block bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-xl shadow-lg transition cursor-pointer">
-                            Marcar como Perdida
                         </a>
                         @break
                 @endswitch
@@ -176,11 +171,11 @@
                        class="inline-block bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-xl shadow-lg transition cursor-pointer">
                         Ver Proposta
                     </a>
-                    
+
                 @endif
 
                 @if($lead->contract)
-                    <a href="{{ route('leads.contract.show', ['lead_id' => $lead->id]) }}"
+                    <a href="{{ route('leads.contracts.show', ['lead_id' => $lead->id, 'proposal_id' => $lead->proposal->id]) }}"
                        class="inline-block bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-xl shadow-lg transition cursor-pointer">
                         Ver Contrato
                     </a>

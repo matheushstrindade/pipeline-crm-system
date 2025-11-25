@@ -33,9 +33,6 @@
                             <option value="{{ $pipelineStage->id }}" {{ request('pipeline_stage') == $pipelineStage->id ? 'selected' : '' }}>
                                 {{ $pipelineStage->name }}</option>
                         @endforeach
-                        <option value="on_going" {{ request('pipeline_stage') == 'on_going' ? 'selected' : '' }}>Em Andamento</option>
-                        <option value="completed" {{ request('pipeline_stage') == 'completed' ? 'selected' : '' }}>Finalizada</option>
-                        <option value="lost" {{ request('pipeline_stage') == 'lost' ? 'selected' : '' }}>Perdida</option>
                     </select>
                 </form>
 
